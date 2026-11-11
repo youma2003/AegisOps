@@ -1,0 +1,61 @@
+// Server: aegis-probe (M1, Go). Client: telemetry-service (M1).
+syntax = "proto3";
+
+package aegisops.v1;
+
+option java_package = "io.aegisops.proto.v1";
+option java_multiple_files = true;
+option go_package = "github.com/youma2003/AegisOps/aegis-probe/gen/aegisops/v1;aegisv1";
+
+import "aegisops/v1/common.proto";
+
+service ProbeService {
+  rpc RegisterServer(RegisterServerRequest) returns (ActionResult);
+  rpc DeregisterServer(ServerRef) returns (ActionResult);
+  rpc StartChaos(ChaosRequest) returns (ChaosHandle);
+  rpc StopChaos(ChaosHandle) returns (ActionResult);
+  rpc RestartServer(ServerRef) returns (ActionResult);
+  rpc SetIsolation(IsolationRequest) returns (ActionResult);
+  rpc GetSnapshot(ServerRef) returns (MetricSample);
+  rpc StreamMetrics(StreamMetricsRequest) returns (stream MetricSample); // live dashboard
+}
+
+enum ChaosType {
+  CHAOS_TYPE_UNSPECIFIED = 0;
+  CPU_SPIKE = 1;
+  MEMORY_LEAK = 2;
+  LATENCY_INJECTION = 3;
+  DDOS_FLOOD = 4;
+  CRASH = 5;
+}
+
+message RegisterServerRequest {
+  string server_id = 1;
+  string name = 2;
+  string zone = 3;
+  double baseline_cpu = 4;
+  double baseline_mem = 5;
+}
+
+message ChaosRequest {
+  string scenario_id = 1;
+  string server_id = 2;
+  ChaosType type = 3;
+  double intensity = 4; // 0..1
+  int32 duration_s = 5; // 0 = until StopChaos
+  repeated string attacker_ips = 6; // DDOS_FLOOD only
+}
+
+message ChaosHandle {
+  string chaos_id = 1;
+}
+
+message IsolationRequest {
+  string server_id = 1;
+  bool isolated = 2;
+  string reason = 3;
+}
+
+message StreamMetricsRequest {
+  string server_id = 1; // empty = all servers
+}

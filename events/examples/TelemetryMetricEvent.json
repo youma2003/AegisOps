@@ -1,0 +1,17 @@
+{
+  "eventId": "6f1c2e7a-0000-4000-8000-000000000001",
+  "eventType": "TelemetryMetricEvent",
+  "version": 1,
+  "occurredAt": "2026-11-09T14:03:10.500Z",
+  "traceId": "a1b2c3d4e5f6",
+  "source": "aegis-probe",
+  "payload": {
+    "serverId": "web-01",
+    "cpuPercent": 37.5,
+    "memPercent": 61.2,
+    "latencyMs": 84.0,
+    "errorRate": 0.004,
+    "requestsPerSec": 312,
+    "status": "UP"
+  }
+}

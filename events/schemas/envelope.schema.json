@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aegisops.io/events/envelope.schema.json",
+  "title": "EventEnvelope",
+  "description": "Common envelope of every AegisOps Kafka message. Kafka key = serverId.",
+  "type": "object",
+  "required": [
+    "eventId",
+    "eventType",
+    "version",
+    "occurredAt",
+    "traceId",
+    "source",
+    "payload"
+  ],
+  "properties": {
+    "eventId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Consumers ignore an eventId already processed"
+    },
+    "eventType": {
+      "type": "string",
+      "enum": [
+        "TelemetryMetricEvent",
+        "TrafficSampleEvent",
+        "ChaosInjectedEvent",
+        "ChaosStoppedEvent",
+        "CriticalAnomalyDetectedEvent",
+        "IpBlockedEvent",
+        "IpUnblockedEvent",
+        "AutoRemediationCompletedEvent"
+      ]
+    },
+    "version": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "occurredAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "traceId": {
+      "type": "string",
+      "description": "Also sent as Kafka header x-trace-id"
+    },
+    "source": {
+      "type": "string",
+      "enum": [
+        "aegis-probe",
+        "telemetry-service",
+        "shield-service",
+        "shield-engine",
+        "commander-service"
+      ]
+    },
+    "payload": {
+      "type": "object"
+    }
+  },
+  "additionalProperties": true
+}

@@ -1,0 +1,27 @@
+{
+  "eventId": "6f1c2e7a-0000-4000-8000-000000000008",
+  "eventType": "AutoRemediationCompletedEvent",
+  "version": 1,
+  "occurredAt": "2026-11-09T14:03:16.000Z",
+  "traceId": "a1b2c3d4e5f6",
+  "source": "commander-service",
+  "payload": {
+    "incidentId": "inc-77",
+    "anomalyId": "an-5521",
+    "serverId": "web-01",
+    "status": "RESOLVED",
+    "rootCause": "Volumetric DDoS from 3 IPs",
+    "runbookId": "RB-01",
+    "decidedBy": "LLM",
+    "actions": [
+      {
+        "order": 1,
+        "type": "BLOCK_IP",
+        "target": "203.0.113.7",
+        "result": "OK",
+        "at": "2026-11-09T14:03:14Z"
+      }
+    ],
+    "durationMs": 4120
+  }
+}

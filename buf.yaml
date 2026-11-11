@@ -1,0 +1,16 @@
+version: v2
+modules:
+  - path: proto
+lint:
+  use:
+    - STANDARD
+  except:
+    # The contracts keep the short enum values (LOW, CPU_SPIKE) and the shared
+    # request/response messages (ServerRef, ActionResult) chosen in the plan.
+    - ENUM_VALUE_PREFIX
+    - RPC_REQUEST_STANDARD_NAME
+    - RPC_RESPONSE_STANDARD_NAME
+    - RPC_REQUEST_RESPONSE_UNIQUE
+breaking:
+  use:
+    - FILE

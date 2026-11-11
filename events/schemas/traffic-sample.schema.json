@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aegisops.io/events/traffic-sample.schema.json",
+  "title": "TrafficSampleEvent",
+  "description": "Topic aegis.telemetry.traffic. Producer aegis-probe, every 1 s per server.",
+  "type": "object",
+  "required": [
+    "serverId",
+    "windowStart",
+    "windowSeconds",
+    "bySourceIp"
+  ],
+  "properties": {
+    "serverId": {
+      "type": "string"
+    },
+    "windowStart": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "windowSeconds": {
+      "type": "integer"
+    },
+    "bySourceIp": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "ip",
+          "requests"
+        ],
+        "properties": {
+          "ip": {
+            "type": "string"
+          },
+          "requests": {
+            "type": "integer"
+          }
+        }
+      }
+    }
+  },
+  "additionalProperties": true
+}

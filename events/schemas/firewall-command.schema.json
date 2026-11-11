@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aegisops.io/events/firewall-command.schema.json",
+  "title": "IpBlockedEvent / IpUnblockedEvent",
+  "description": "Topic aegis.firewall.commands. Producer shield-service.",
+  "type": "object",
+  "required": [
+    "ip",
+    "reason"
+  ],
+  "properties": {
+    "ip": {
+      "type": "string"
+    },
+    "serverId": {
+      "type": "string"
+    },
+    "reason": {
+      "type": "string"
+    },
+    "incidentId": {
+      "type": "string"
+    },
+    "blockedBy": {
+      "type": "string",
+      "enum": [
+        "AI_COMMANDER",
+        "ADMIN"
+      ]
+    },
+    "expiresAt": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    }
+  },
+  "additionalProperties": true
+}

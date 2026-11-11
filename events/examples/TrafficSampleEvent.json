@@ -1,0 +1,23 @@
+{
+  "eventId": "6f1c2e7a-0000-4000-8000-000000000002",
+  "eventType": "TrafficSampleEvent",
+  "version": 1,
+  "occurredAt": "2026-11-09T14:03:12.000Z",
+  "traceId": "a1b2c3d4e5f6",
+  "source": "aegis-probe",
+  "payload": {
+    "serverId": "web-01",
+    "windowStart": "2026-11-09T14:03:11Z",
+    "windowSeconds": 1,
+    "bySourceIp": [
+      {
+        "ip": "203.0.113.7",
+        "requests": 812
+      },
+      {
+        "ip": "10.0.0.15",
+        "requests": 4
+      }
+    ]
+  }
+}

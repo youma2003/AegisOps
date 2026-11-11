@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aegisops.io/events/critical-anomaly.schema.json",
+  "title": "CriticalAnomalyDetectedEvent",
+  "description": "Topic aegis.alerts.critical. Producer shield-engine.",
+  "type": "object",
+  "required": [
+    "anomalyId",
+    "serverId",
+    "anomalyType",
+    "severity",
+    "detectedAt",
+    "ruleId",
+    "metric",
+    "observedValue",
+    "threshold"
+  ],
+  "properties": {
+    "anomalyId": {
+      "type": "string"
+    },
+    "serverId": {
+      "type": "string"
+    },
+    "anomalyType": {
+      "type": "string",
+      "enum": [
+        "DDOS",
+        "MEMORY_LEAK",
+        "CPU_SATURATION",
+        "LATENCY_DEGRADATION",
+        "SERVER_DOWN"
+      ]
+    },
+    "severity": {
+      "type": "string",
+      "enum": [
+        "LOW",
+        "MEDIUM",
+        "HIGH",
+        "CRITICAL"
+      ]
+    },
+    "detectedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "ruleId": {
+      "type": "string"
+    },
+    "metric": {
+      "type": "string"
+    },
+    "observedValue": {
+      "type": "number"
+    },
+    "threshold": {
+      "type": "number"
+    },
+    "windowSeconds": {
+      "type": "integer"
+    },
+    "suspectIps": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "additionalProperties": true
+}

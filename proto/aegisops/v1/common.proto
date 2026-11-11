@@ -1,0 +1,40 @@
+// Shared messages. Owner: all three (change only by a PR approved by everyone).
+// RULE: never change or reuse a field number; only add new fields.
+syntax = "proto3";
+
+package aegisops.v1;
+
+option java_package = "io.aegisops.proto.v1";
+option java_multiple_files = true;
+option go_package = "github.com/youma2003/AegisOps/aegis-probe/gen/aegisops/v1;aegisv1";
+
+message ServerRef {
+  string server_id = 1;
+}
+
+message Empty {}
+
+enum Severity {
+  SEVERITY_UNSPECIFIED = 0;
+  LOW = 1;
+  MEDIUM = 2;
+  HIGH = 3;
+  CRITICAL = 4;
+}
+
+message MetricSample {
+  string server_id = 1;
+  int64 timestamp_ms = 2;
+  double cpu_percent = 3; // 0..100
+  double mem_percent = 4; // 0..100
+  double latency_ms = 5; // p95 over the last tick
+  double error_rate = 6; // 0..1
+  int32 requests_per_sec = 7;
+  string status = 8; // UP | DEGRADED | DOWN | ISOLATED
+}
+
+message ActionResult {
+  bool success = 1;
+  string message = 2;
+  string action_id = 3; // UUID, echoed in logs and audit
+}

@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aegisops.io/events/telemetry-metric.schema.json",
+  "title": "TelemetryMetricEvent",
+  "description": "Topic aegis.telemetry.metrics. Producer aegis-probe, every 500 ms per server.",
+  "type": "object",
+  "required": [
+    "serverId",
+    "cpuPercent",
+    "memPercent",
+    "latencyMs",
+    "errorRate",
+    "requestsPerSec",
+    "status"
+  ],
+  "properties": {
+    "serverId": {
+      "type": "string"
+    },
+    "cpuPercent": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "memPercent": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "latencyMs": {
+      "type": "number"
+    },
+    "errorRate": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "requestsPerSec": {
+      "type": "integer"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "UP",
+        "DEGRADED",
+        "DOWN",
+        "ISOLATED"
+      ]
+    }
+  },
+  "additionalProperties": true
+}

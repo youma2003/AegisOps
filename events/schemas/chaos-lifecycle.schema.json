@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aegisops.io/events/chaos-lifecycle.schema.json",
+  "title": "ChaosInjectedEvent / ChaosStoppedEvent",
+  "description": "Topic aegis.chaos.lifecycle. Producer telemetry-service.",
+  "type": "object",
+  "required": [
+    "chaosId",
+    "scenarioId",
+    "serverId",
+    "type"
+  ],
+  "properties": {
+    "chaosId": {
+      "type": "string"
+    },
+    "scenarioId": {
+      "type": "string"
+    },
+    "serverId": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "CPU_SPIKE",
+        "MEMORY_LEAK",
+        "LATENCY_INJECTION",
+        "DDOS_FLOOD",
+        "CRASH"
+      ]
+    },
+    "intensity": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "attackerIps": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "startedBy": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": true
+}

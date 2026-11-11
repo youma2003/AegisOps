@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Root (aggregator) POM: builds every Java module from the repo root.
+    ./mvnw verify                              -> all modules
+    ./mvnw -pl telemetry-service -am verify    -> one module
+  Each module keeps its own parent (Spring Boot or Quarkus).
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>io.aegisops</groupId>
+    <artifactId>aegisops</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>AegisOps</name>
+
+    <modules>
+        <module>aegis-proto</module>        <!-- shared: Java gRPC stubs from proto/ -->
+        <module>telemetry-service</module>  <!-- M1 -->
+        <module>shield-service</module>     <!-- M2 -->
+        <module>shield-engine</module>      <!-- M2 -->
+        <module>commander-service</module>  <!-- M3 -->
+    </modules>
+</project>

@@ -1,0 +1,42 @@
+// Server: shield-engine (M2, Quarkus). Client: shield-service (M2).
+syntax = "proto3";
+
+package aegisops.v1;
+
+option java_package = "io.aegisops.proto.v1";
+option java_multiple_files = true;
+option go_package = "github.com/youma2003/AegisOps/aegis-probe/gen/aegisops/v1;aegisv1";
+
+import "aegisops/v1/common.proto";
+
+service ShieldEngineService {
+  rpc SyncRules(RuleSet) returns (ActionResult); // called when rules change in shield-service
+  rpc SyncBlocklist(Blocklist) returns (ActionResult);
+  rpc GetEngineStats(Empty) returns (EngineStats);
+}
+
+message ThresholdRule {
+  string rule_id = 1;
+  string metric = 2; // cpu_percent | mem_percent | latency_ms | error_rate | rps_per_ip | mem_slope
+  string operator = 3; // GT | LT
+  double value = 4;
+  int32 window_s = 5; // sliding window length
+  Severity severity = 6;
+  string anomaly_type = 7; // DDOS | MEMORY_LEAK | CPU_SATURATION | LATENCY_DEGRADATION | SERVER_DOWN
+}
+
+message RuleSet {
+  int64 version = 1;
+  repeated ThresholdRule rules = 2;
+}
+
+message Blocklist {
+  int64 version = 1;
+  repeated string ips = 2;
+}
+
+message EngineStats {
+  int64 events_per_sec = 1;
+  int64 alerts_last_hour = 2;
+  int64 rules_version = 3;
+}

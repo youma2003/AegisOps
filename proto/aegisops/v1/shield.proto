@@ -1,0 +1,54 @@
+// Server: shield-service (M2). Client: commander-service (M3, AI tools).
+syntax = "proto3";
+
+package aegisops.v1;
+
+option java_package = "io.aegisops.proto.v1";
+option java_multiple_files = true;
+option go_package = "github.com/youma2003/AegisOps/aegis-probe/gen/aegisops/v1;aegisv1";
+
+import "aegisops/v1/common.proto";
+
+service ShieldService {
+  rpc BlockIp(BlockIpRequest) returns (ActionResult);
+  rpc UnblockIp(UnblockIpRequest) returns (ActionResult);
+  rpc GetIpReputation(IpRef) returns (IpReputation);
+  rpc ListActiveAnomalies(ServerRef) returns (AnomalyList);
+}
+
+message BlockIpRequest {
+  string ip = 1;
+  string server_id = 2;
+  string reason = 3;
+  string incident_id = 4;
+  int32 ttl_minutes = 5; // 0 = permanent
+  string idempotency_key = 6;
+}
+
+message UnblockIpRequest {
+  string ip = 1;
+  string incident_id = 2;
+  string idempotency_key = 3;
+}
+
+message IpRef {
+  string ip = 1;
+}
+
+message IpReputation {
+  string ip = 1;
+  bool blocked = 2;
+  int32 anomalies_last_24h = 3;
+}
+
+message Anomaly {
+  string anomaly_id = 1;
+  string server_id = 2;
+  string type = 3;
+  Severity severity = 4;
+  int64 detected_at_ms = 5;
+}
+
+message AnomalyList {
+  repeated Anomaly anomalies = 1;
+}

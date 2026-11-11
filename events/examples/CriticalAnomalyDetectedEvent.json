@@ -1,0 +1,25 @@
+{
+  "eventId": "6f1c2e7a-0000-4000-8000-000000000005",
+  "eventType": "CriticalAnomalyDetectedEvent",
+  "version": 1,
+  "occurredAt": "2026-11-09T14:03:12.120Z",
+  "traceId": "a1b2c3d4e5f6",
+  "source": "shield-engine",
+  "payload": {
+    "anomalyId": "an-5521",
+    "serverId": "web-01",
+    "anomalyType": "DDOS",
+    "severity": "CRITICAL",
+    "detectedAt": "2026-11-09T14:03:12.050Z",
+    "ruleId": "r-rps-ip",
+    "metric": "rps_per_ip",
+    "observedValue": 812,
+    "threshold": 500,
+    "windowSeconds": 5,
+    "suspectIps": [
+      "203.0.113.7",
+      "203.0.113.8",
+      "203.0.113.9"
+    ]
+  }
+}

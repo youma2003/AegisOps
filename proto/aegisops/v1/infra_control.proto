@@ -1,0 +1,39 @@
+// Server: telemetry-service (M1). Client: commander-service (M3, AI tools).
+syntax = "proto3";
+
+package aegisops.v1;
+
+option java_package = "io.aegisops.proto.v1";
+option java_multiple_files = true;
+option go_package = "github.com/youma2003/AegisOps/aegis-probe/gen/aegisops/v1;aegisv1";
+
+import "aegisops/v1/common.proto";
+
+service InfraControlService {
+  rpc ListServers(Empty) returns (ServerList);
+  rpc GetServer(ServerRef) returns (ServerInfo);
+  rpc GetLiveMetrics(ServerRef) returns (MetricSample);
+  rpc IsolateServer(RemediationRequest) returns (ActionResult);
+  rpc ReintegrateServer(RemediationRequest) returns (ActionResult);
+  rpc RestartServer(RemediationRequest) returns (ActionResult);
+  rpc StopChaos(ServerRef) returns (ActionResult);
+}
+
+message RemediationRequest {
+  string server_id = 1;
+  string incident_id = 2;
+  string reason = 3;
+  string idempotency_key = 4; // incidentId + step order: same key twice = executed once
+}
+
+message ServerInfo {
+  string server_id = 1;
+  string name = 2;
+  string zone = 3;
+  string status = 4;
+  repeated string neighbours = 5;
+}
+
+message ServerList {
+  repeated ServerInfo servers = 1;
+}

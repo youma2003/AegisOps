@@ -1,0 +1,21 @@
+{
+  "eventId": "6f1c2e7a-0000-4000-8000-000000000004",
+  "eventType": "ChaosStoppedEvent",
+  "version": 1,
+  "occurredAt": "2026-11-09T14:03:14.000Z",
+  "traceId": "a1b2c3d4e5f6",
+  "source": "telemetry-service",
+  "payload": {
+    "chaosId": "c-91",
+    "scenarioId": "sc-ddos-web01",
+    "serverId": "web-01",
+    "type": "DDOS_FLOOD",
+    "intensity": 0.8,
+    "attackerIps": [
+      "203.0.113.7",
+      "203.0.113.8",
+      "203.0.113.9"
+    ],
+    "startedBy": "admin"
+  }
+}

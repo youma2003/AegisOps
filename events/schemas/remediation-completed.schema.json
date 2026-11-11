@@ -1,0 +1,91 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aegisops.io/events/remediation-completed.schema.json",
+  "title": "AutoRemediationCompletedEvent",
+  "description": "Topic aegis.remediation.completed. Producer commander-service.",
+  "type": "object",
+  "required": [
+    "incidentId",
+    "anomalyId",
+    "serverId",
+    "status",
+    "decidedBy",
+    "actions"
+  ],
+  "properties": {
+    "incidentId": {
+      "type": "string"
+    },
+    "anomalyId": {
+      "type": "string"
+    },
+    "serverId": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "RESOLVED",
+        "FAILED",
+        "COMPENSATED",
+        "ESCALATED"
+      ]
+    },
+    "rootCause": {
+      "type": "string"
+    },
+    "runbookId": {
+      "type": "string"
+    },
+    "decidedBy": {
+      "type": "string",
+      "enum": [
+        "LLM",
+        "FALLBACK"
+      ]
+    },
+    "actions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "order",
+          "type",
+          "target",
+          "result"
+        ],
+        "properties": {
+          "order": {
+            "type": "integer"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "BLOCK_IP",
+              "UNBLOCK_IP",
+              "ISOLATE",
+              "REINTEGRATE",
+              "RESTART",
+              "STOP_CHAOS",
+              "VERIFY"
+            ]
+          },
+          "target": {
+            "type": "string"
+          },
+          "result": {
+            "type": "string"
+          },
+          "at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      }
+    },
+    "durationMs": {
+      "type": "integer"
+    }
+  },
+  "additionalProperties": true
+}
